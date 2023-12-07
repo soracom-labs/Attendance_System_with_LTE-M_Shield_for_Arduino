@@ -10,10 +10,6 @@
 #define SKETCH_NAME "[Multifunction Button]"
 #define VERSION "1.0"
 
-int hour;
-int minute;
-int second;
-
 // ================================================================================
 /* !!利用者が設定するパラメータ */
 // 記録内容
@@ -170,9 +166,9 @@ void loop() {
   // 取得結果の表示
   // CONSOLE.println("Current Date and Time: " + dateTime);
 
-  hour = dateTime.substring(0, 2).toInt();
-  minute = dateTime.substring(3, 5).toInt();
-  second = dateTime.substring(6, 8).toInt();
+  int hour = dateTime.substring(0, 2).toInt();
+  int minute = dateTime.substring(3, 5).toInt();
+  int second = dateTime.substring(6, 8).toInt();
 
   u8x8.drawString(0, 6, dateTime.substring(0, 2).c_str());
   u8x8.drawString(2, 6, ":"); 
