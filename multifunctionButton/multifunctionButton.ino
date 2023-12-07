@@ -13,7 +13,6 @@
 int hour;
 int minute;
 int second;
-int status;       // 1(Function1) or 2(Function2)
 
 // ================================================================================
 /* !!利用者が設定するパラメータ */
@@ -22,7 +21,7 @@ int status;       // 1(Function1) or 2(Function2)
 #define Function1 "Punch-In "
 #define Function2 "Punch-Out"
 
-// 記録内容を切り替える時間
+// 記録内容を切り替える時刻
 #define TargetHour 12    // 時
 #define TargetMinute 0   // 分
 
@@ -114,14 +113,15 @@ void setup() {
 }
 
 // ================================================================================
-/* 時間帯によって記録内容を切り替えるための関数 */
-void compareTime(int targetHour, int targetMinute, int currentHour, int currentMinute) {
+/* 記録内容の切り替え時刻と現在時刻を比較する関数 */
+// 返り値：1 or 2 (記録内容としてFunction1を採用すべき時は1を、Function2を採用すべき時は2を返す)
+int compareTime(int targetHour, int targetMinute, int currentHour, int currentMinute) {
   if (currentHour < targetHour || (currentHour == targetHour && currentMinute < targetMinute)) {
     u8x8.drawString(0, 2, Function1);
-    status = 1;
+    return 1;
   } else {
     u8x8.drawString(0, 2, Function2);
-    status = 2;
+    return 2;
   }
 }
 
@@ -180,7 +180,8 @@ void loop() {
   u8x8.drawString(5, 6, ":"); 
   u8x8.drawString(6, 6, dateTime.substring(6, 8).c_str());
 
-  compareTime(TargetHour, TargetMinute, hour, minute);
+  // 関数compareTime()の返り値を変数statusに格納
+  int status = compareTime(TargetHour, TargetMinute, hour, minute);
 
   // ボタンの状態の読み込み
   if (digitalRead(buttonPin)) {
