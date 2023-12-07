@@ -175,6 +175,7 @@ void loop() {
   u8x8.drawString(3, 6, dateTime.substring(3, 5).c_str());
   u8x8.drawString(5, 6, ":"); 
   u8x8.drawString(6, 6, dateTime.substring(6, 8).c_str());
+  u8x8.drawString(8, 6, "  ");
 
   // 関数compareTime()の返り値を変数statusに格納
   int status = compareTime(TargetHour, TargetMinute, hour, minute);
@@ -182,7 +183,7 @@ void loop() {
   // ボタンの状態の読み込み
   if (digitalRead(buttonPin)) {
     // ボタンが押された場合
-    u8x8.drawString(0, 6, "REPORTED");
+    u8x8.drawString(0, 6, "REPORTING ");
     CONSOLE.println(" ");
 
     if (status == 1) {
@@ -192,7 +193,9 @@ void loop() {
     }
     
     sendData(status);
-    delay(500);
+
+    u8x8.drawString(0, 6, "REPORTED  ");
+    delay(1000);
   } 
 
   delay(100);
