@@ -113,10 +113,8 @@ void setup() {
 // 返り値：1 or 2 (記録内容としてFunction1を採用すべき時は1を、Function2を採用すべき時は2を返す)
 int compareTime(int targetHour, int targetMinute, int currentHour, int currentMinute) {
   if (currentHour < targetHour || (currentHour == targetHour && currentMinute < targetMinute)) {
-    u8x8.drawString(0, 2, Function1);
     return 1;
   } else {
-    u8x8.drawString(0, 2, Function2);
     return 2;
   }
 }
@@ -179,6 +177,12 @@ void loop() {
 
   // 関数compareTime()の返り値を変数statusに格納
   int status = compareTime(TargetHour, TargetMinute, hour, minute);
+
+  if (status == 1) {
+    u8x8.drawString(0, 2, Function1);
+  } else {
+    u8x8.drawString(0, 2, Function2);
+  }
 
   // ボタンの状態の読み込み
   if (digitalRead(buttonPin)) {
