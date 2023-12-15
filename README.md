@@ -1,4 +1,4 @@
-# Attendance_System_with_LTE-M_Shield_for_Arduino
+# Attendance System with LTE-M Shield for Arduino
 
 ## Purpose
 
