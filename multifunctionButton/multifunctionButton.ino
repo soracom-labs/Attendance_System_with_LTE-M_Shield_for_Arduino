@@ -1,8 +1,11 @@
 /*
  * multifunctionButton.ino
+ * A button that automatically switches functions based on the current time
  *
- * 時間帯によって記録内容が自動的に切り替わるボタン
- * A button that automatically switches functions based on the current time.
+ * Copyright SORACOM
+ * This software is released under the MIT License, and libraries used by these sketches
+ * are subject to their respective licenses.
+ * See also: https://github.com/soracom-labs/Attendance_System_with_LTE-M_Shield_for_Arduino/README.md
 */
 
 #define CONSOLE Serial
